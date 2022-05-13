@@ -7,18 +7,9 @@ import R from "./ramda.js";
  * @version 2021/22
  * @property {object} q1
  */
-const Exam_questions = {
-    "q1": {},
-    "q2": {},
-    "q3": {},
-    "q4": {},
-    "q5": {},
-    "q6": {},
-    "q7": {},
-    "q8": {}
-};
 
-/**
+
+/*
  * Write a function to find the shortest word from a list of words.
  * @memberof! Exam_questions
  * @function
@@ -26,8 +17,23 @@ const Exam_questions = {
  * @returns {string} The shortest word in the input array.
  * @example shortest_word(["hello", "cat", "ok", "12345"]) // "ok";
  */
-Exam_questions.q1.shortest_word = function (word_array) {
+
+
+const shortest_word = function (word_array) {
+    var min = 1000000;
+    for (let i = 1; i < word_array.length; i += 1) {
+        if (word_array[i].length < min) {
+            min = word_array[i].length;
+            var minword = word_array[i];
+        }
+        else if (word_array[i].length === min) {
+            minword += "and" + word_array[i];
+        }
+    }
+    return minword;
 };
+
+
 
 /**
  * Write a function to find the sum of all the numerical values in a list
@@ -39,7 +45,15 @@ Exam_questions.q1.shortest_word = function (word_array) {
  * @returns {number} The sum of the numeric entries.
  * @example sum_of_numbers(["hello", "cat", 2, true, 17, undefined]) // 19;
  */
-Exam_questions.q2.sum_of_numbers = function (array_of_any_type) {
+const sum_of_numbers = function (array_of_any_type) {
+    array_of_any_type.forEach(arrayfunction);
+    var sum = 0;
+    function arrayfunction(value) {
+        if (typeof value === "number" && isFinite(value)) {
+            sum += value;
+        }
+    }
+    return sum
 };
 
 /**
@@ -64,6 +78,25 @@ Exam_questions.q2.sum_of_numbers = function (array_of_any_type) {
  *   // "never odd or even"
  */
 Exam_questions.q3.longest_palindrome = function (string_array) {
+    var max = 0;
+    string_array.forEach(string_array_function);
+    function arrayfunction(value, index, array) {
+        array = array.replace(" ", "");
+        var sum = 0;
+        for (i = 0; i < value.length / 2;i+=1){
+            if (array[index] === array[-index - 1]) {
+                sum += 1;
+            }
+        }
+        if (sum>max){
+            max=sum;
+            var maxword=value;
+        }
+        else if(sum=max){
+            maxword += "and ${value}"
+        }
+    return maxword;
+    }
 };
 
 /**
@@ -142,6 +175,17 @@ Exam_questions.q7.even_digits = function (a, b) {
  */
 Exam_questions.q8.age_question = function (name = "Andrea", age = 19) {
     return `Hello ${name}, is your age ${age}?`;
+};
+
+const Exam_questions = {
+    "q1": shortest_word,
+    "q2": sum_of_numbers,
+    "q3": {},
+    "q4": {},
+    "q5": {},
+    "q6": {},
+    "q7": {},
+    "q8": {}
 };
 
 export default Object.freeze(Exam_questions);
