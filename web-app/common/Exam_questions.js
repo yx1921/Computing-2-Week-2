@@ -1,3 +1,4 @@
+import { F } from "ramda";
 import R from "./ramda.js";
 
 /**
@@ -27,6 +28,17 @@ const Exam_questions = {
  * @example shortest_word(["hello", "cat", "ok", "12345"]) // "ok";
  */
 Exam_questions.q1.shortest_word = function (word_array) {
+    var min = 1000000;
+    for (let i = 1; i < word_array.length; i += 1) {
+        if (word_array[i].length < min) {
+            min = word_array[i].length;
+            var minword = word_array[i];
+        }
+        else if (word_array[i].length === min) {
+            minword += "and" + word_array[i];
+        }
+    }
+    return minword;
 };
 
 /**
@@ -40,6 +52,14 @@ Exam_questions.q1.shortest_word = function (word_array) {
  * @example sum_of_numbers(["hello", "cat", 2, true, 17, undefined]) // 19;
  */
 Exam_questions.q2.sum_of_numbers = function (array_of_any_type) {
+    array_of_any_type.forEach(arrayfunction);
+    var sum = 0;
+    function arrayfunction(value) {
+        if (typeof value === "number" && isFinite(value)) {
+            sum += value;
+        }
+    }
+    return sum
 };
 
 /**
@@ -64,6 +84,25 @@ Exam_questions.q2.sum_of_numbers = function (array_of_any_type) {
  *   // "never odd or even"
  */
 Exam_questions.q3.longest_palindrome = function (string_array) {
+    var max = 0;
+    string_array.forEach(string_array_function);
+    function string_array_function(value, index, array) {
+        array = array.replace(" ", "");
+        var sum = 0;
+        for (i = 0; i < value.length / 2;i+=1){
+            if (array[index] === array[-index - 1]) {
+                sum += 1;
+            }
+        }
+        if (sum>max){
+            max=sum;
+            var maxword=value;
+        }
+        else if(sum=max){
+            maxword += "and ${value}"
+        }
+    return maxword;
+    }
 };
 
 /**
@@ -78,6 +117,13 @@ Exam_questions.q3.longest_palindrome = function (string_array) {
  * @example perfect_squares(2, 16) // [4, 9, 16]
  */
 Exam_questions.q4.perfect_squares = function (a, b) {
+    const result = []
+    for (let i = a; i<=b; i++) {
+        if (Number.isInteger(i^(1/2))) {
+            result.push(i)
+        }
+    }
+    return result;
 };
 
 /**
@@ -94,6 +140,12 @@ Exam_questions.q4.perfect_squares = function (a, b) {
  *   // {"numbers": [1, 3, 5, 6], "powers": [1, 9, 25, 36]}
  */
 Exam_questions.q5.power_object = function (numbers, exponent) {
+    const q5result = {"numbers":numbers,"powers":[]}
+    numbers.forEach(numebr_function)
+    function numebr_function(value) {
+        q5result["powers"].push(value^exponent)
+    }
+    return q5result;
 };
 
 /**
@@ -112,6 +164,21 @@ Exam_questions.q5.power_object = function (numbers, exponent) {
  * @example missing_character("hello", "hellonn") // undefined
  */
 Exam_questions.q6.missing_character = function (short_string, long_string) {
+    const sum=0;
+    for (i=0;i<short_string.length;i++){
+        for (j=0;j<=long_string.length;j++){
+            if (short_string.charAt(i) == long_string.charAt(j)){
+                sum+=1
+                var extra=short_string.charAt(i)
+            }
+        }
+    }
+    if (sum){
+        return extra;
+    }
+    else{
+        return undefined
+    }
 };
 
 /**
@@ -126,7 +193,27 @@ Exam_questions.q6.missing_character = function (short_string, long_string) {
  * @example even_digits(2, 27) // [2, 4, 6, 8, 20, 22, 24, 26]
  */
 Exam_questions.q7.even_digits = function (a, b) {
+    list=[]
+    for (i=a;i<=b;i++){
+        flag=true
+        if(i%2==0){
+            j=i
+            if (j>=10){
+                while (j>0){
+                    if ((j%10)%2!=0){
+                        flag=False
+                    }
+                    j=int(j/10)
+                }
+            }
+        }
+            if (flag) {
+                list.push(i)
+            }
+    }
+    return list
 };
+
 
 /**
  * Write a function with two inputs arguments 'name', 'age'.
@@ -141,7 +228,7 @@ Exam_questions.q7.even_digits = function (a, b) {
  * @example age_question("Pietro", 32) // "Hello Pietro, is your age 32?"
  */
 Exam_questions.q8.age_question = function (name = "Andrea", age = 19) {
-    return `Hello ${name}, is your age ${age}?`;
+    return `Hello ${name}, is your age ${age}?`
 };
 
 export default Object.freeze(Exam_questions);

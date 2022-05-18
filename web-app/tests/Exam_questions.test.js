@@ -1,7 +1,7 @@
 import Exam_questions from "../common/Exam_questions_FP.js";
 import R from "../common/ramda.js";
 
-const shortest_word = Exam_questions.q1.shortest_word;
+const shortest_word = Exam_questions.q1;
 describe("Question 1", function () {
     it("A list of words returns the shortest word if unique", function () {
         const input = ["hello", "cat", "ok", "12345"];
@@ -43,7 +43,7 @@ describe("Question 1", function () {
     });
 });
 
-const sum_of_numbers = Exam_questions.q2.sum_of_numbers;
+const sum_of_numbers = Exam_questions.q2;
 describe("Question 2", function () {
     it(
         "A list of only numbers returns its sum",
